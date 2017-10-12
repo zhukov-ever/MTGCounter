@@ -3,17 +3,41 @@
 
     <ContentView.Content>
 
-        <StackLayout Orientation="Vertical">
-            <Label Text="Player" HorizontalOptions="Center" HeightRequest="50" BackgroundColor="Aqua"/>
+        <Grid BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Player" HorizontalOptions="Center" Font="25" 
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <Button Text="-" BackgroundColor="Silver" Font="20"
+                    Grid.Row="1" Grid.Column="0" />
+            <Button Text="+" BackgroundColor="Silver" Font="20"
+                    Grid.Row="1" Grid.Column="2" />
+            <Label Text="30" VerticalTextAlignment="Center" Font="20"
+                   HorizontalTextAlignment="Center"
+                   Grid.Row="1" Grid.Column="1" />
+        </Grid>
+
+
+        
+        <!--<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="White">
+            <Label Text="Player" HorizontalOptions="Center" Font="25"/>
             <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Button Text="-1"/>
-                <Button Text="-5"/>
-                <Label Text="30"/>
-                <Button Text="+5"/>
-                <Button Text="+1"/>
+                <Button Text="-1" BackgroundColor="Silver" Font="20"/>
+                <Button Text="-5" BackgroundColor="Silver" Font="20"/>
+                <Label Text="30" VerticalTextAlignment="Center" Font="20"/>
+                <Button Text="+5" BackgroundColor="Silver" Font="20"/>
+                <Button Text="+1" BackgroundColor="Silver" Font="20"/>
             </StackLayout>
             
-        </StackLayout>
+        </StackLayout>-->
         
 	</ContentView.Content>
     

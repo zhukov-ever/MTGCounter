@@ -48,7 +48,7 @@ namespace MTGCounter
         {
             if (this.Width > this.Height)
             {
-                playersGrid.Children.Add(view, position, 0);
+                playersGrid.Children.Add(view, position - (position / 3) * 3, position / 3);
             }
             else
             {

@@ -8,7 +8,8 @@ namespace MTGCounter
         {
             InitializeComponent();
 
-            MainPage = new MTGCounterPage();
+            var page = new NavigationPage(new MTGCounterPage());
+            MainPage = page;
         }
 
         protected override void OnStart()

@@ -7,23 +7,24 @@ namespace MTGCounter
     public partial class MTGCounterPage : ContentPage
     {
 
-        public ObservableCollection<PlayerViewModel> players { get; set; }
+        ObservableCollection<PlayerViewModel> Players { get; set; }
 
         public MTGCounterPage()
         {
             InitializeComponent();
 
-            players = new ObservableCollection<PlayerViewModel>();
-            players.Add(new PlayerViewModel { Name = "Zopen'" });
+            Players = new ObservableCollection<PlayerViewModel>
+            {
+                new PlayerViewModel { Name = "Zopen'" }
+            };
 
-			addViewToGrid(new PlayerView(), 0);
-			addViewToGrid(new PlayerView(), 1);
-			addViewToGrid(new PlayerView(), 2);
-			addViewToGrid(new PlayerView(), 3);
-			addViewToGrid(new PlayerView(), 4);
-			addViewToGrid(new PlayerView(), 5);
+            AddViewToGrid(new PlayerView(), playersGrid.Children.Count);
+            AddViewToGrid(new PlayerView(), playersGrid.Children.Count);
+			
+            NavigationPage.SetHasNavigationBar(this, true);
 
-            NavigationPage.SetHasNavigationBar(this, false);
+            this.ToolbarItems.Add(new ToolbarItem("add", null, OnAddHandler, ToolbarItemOrder.Primary, 0));
+            this.ToolbarItems.Add(new ToolbarItem("rm", null, OnRmHandler, ToolbarItemOrder.Primary, 0));
         }
 
         protected override void LayoutChildren(double x, double y, double width, double height)
@@ -40,21 +41,81 @@ namespace MTGCounter
 
             for (int i = 0; i < playersGrid.Children.Count; i++)
             {
-                addViewToGrid(playersGrid.Children[i], i);
+                AddViewToGrid(playersGrid.Children[i], i);
             }
         }
 
-        private void addViewToGrid(Xamarin.Forms.View view, int position)
+        private void AddViewToGrid(Xamarin.Forms.View view, int position)
         {
+            int lineItemCount = 0;
             if (this.Width > this.Height)
             {
-                playersGrid.Children.Add(view, position - (position / 3) * 3, position / 3);
+                switch (playersGrid.Children.Count)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        lineItemCount = 3;
+                        break;
+                    case 4:
+                        lineItemCount = 2;
+                        break;
+                    case 5:
+                    case 6:
+                        lineItemCount = 3;
+                        break;
+                    case 7:
+                    case 8:
+                    default:
+                        lineItemCount = 4;
+                        break;
+
+                }
             }
             else
             {
-                playersGrid.Children.Add(view, 0, position);
+                switch (playersGrid.Children.Count)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        lineItemCount = 1;
+                        break;
+                    case 6:
+                    case 7:
+                    case 8:
+                    default:
+                        lineItemCount = 2;
+                        break;
+
+                }
+            }
+
+            playersGrid.Children.Add(view, position - (position / lineItemCount) * lineItemCount, position / lineItemCount);
+        }
+
+        void OnAddHandler()
+        {
+            if (playersGrid.Children.Count < 8)
+            {
+                AddViewToGrid(new PlayerView(), playersGrid.Children.Count);   
+            } else {
+                DisplayAlert("WOW", "Too much player. cant", "Okay");
             }
         }
+
+        void OnRmHandler()
+        {
+            if (playersGrid.Children.Count > 0)
+            {
+                playersGrid.Children.RemoveAt(playersGrid.Children.Count - 1);
+            } else {
+                DisplayAlert("Err", "No players - no deletions", "Okay");
+            }
+        }
+
 
     }
 

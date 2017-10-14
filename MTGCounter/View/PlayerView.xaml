@@ -6,8 +6,7 @@
         <Grid BackgroundColor="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -25,20 +24,6 @@
                    Grid.Row="1" Grid.Column="1" />
         </Grid>
 
-
-        
-        <!--<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="White">
-            <Label Text="Player" HorizontalOptions="Center" Font="25"/>
-            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Button Text="-1" BackgroundColor="Silver" Font="20"/>
-                <Button Text="-5" BackgroundColor="Silver" Font="20"/>
-                <Label Text="30" VerticalTextAlignment="Center" Font="20"/>
-                <Button Text="+5" BackgroundColor="Silver" Font="20"/>
-                <Button Text="+1" BackgroundColor="Silver" Font="20"/>
-            </StackLayout>
-            
-        </StackLayout>-->
-        
 	</ContentView.Content>
     
 </ContentView>

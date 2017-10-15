@@ -1,6 +1,8 @@
 ﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using MTGCounter.View;
+using System;
+using System.Diagnostics;
 
 namespace MTGCounter
 {
@@ -20,19 +22,10 @@ namespace MTGCounter
 
             AddViewToGrid(new PlayerView(), playersGrid.Children.Count);
             AddViewToGrid(new PlayerView(), playersGrid.Children.Count);
-			
+
             NavigationPage.SetHasNavigationBar(this, true);
 
-            this.ToolbarItems.Add(new ToolbarItem("add", null, OnAddHandler, ToolbarItemOrder.Primary, 0));
-            this.ToolbarItems.Add(new ToolbarItem("rm", null, OnRmHandler, ToolbarItemOrder.Primary, 0));
-        }
-
-        protected override void LayoutChildren(double x, double y, double width, double height)
-        {
-            base.LayoutChildren(x, y, width, height);
-
-
-            //listView.RowHeight = (int)(listView.Height / players.Count);
+            SetupForPreparingGame();
         }
 
         protected override void OnSizeAllocated(double width, double height)
@@ -45,7 +38,7 @@ namespace MTGCounter
             }
         }
 
-        private void AddViewToGrid(Xamarin.Forms.View view, int position)
+        protected void AddViewToGrid(Xamarin.Forms.View view, int position)
         {
             int lineItemCount = 0;
             if (this.Width > this.Height)
@@ -111,9 +104,45 @@ namespace MTGCounter
             if (playersGrid.Children.Count > 0)
             {
                 playersGrid.Children.RemoveAt(playersGrid.Children.Count - 1);
-            } else {
+            }
+            else
+            {
                 DisplayAlert("Err", "No players - no deletions", "Okay");
             }
+        }
+
+        void OnFightHandler()
+        {
+            SetupForActiveGame();
+        }
+
+        async void OnFinishHandler()
+        {
+            var action = await DisplayAlert("Warn!", "Rly finish fight???", "Yes", "NOOOO!!!");
+            if (action) {
+                SetupForPreparingGame();    
+            }
+        }
+
+        void OnRollDiceHandler()
+        {
+            DisplayAlert((new Random().Next() % 6 + 1).ToString(), null, "Done");
+        }
+
+
+        private void SetupForPreparingGame() 
+        {
+            this.ToolbarItems.Clear();
+            this.ToolbarItems.Add(new ToolbarItem("[ add ]", null, OnAddHandler, ToolbarItemOrder.Primary, 0));
+            this.ToolbarItems.Add(new ToolbarItem("[ rm ]", null, OnRmHandler, ToolbarItemOrder.Primary, 1));
+            this.ToolbarItems.Add(new ToolbarItem("[ FIGHT! ]", null, OnFightHandler, ToolbarItemOrder.Primary, 2));
+        }
+
+        private void SetupForActiveGame() 
+        {
+            this.ToolbarItems.Clear();
+            this.ToolbarItems.Add(new ToolbarItem("[ Roll 6-dice ]", null, OnRollDiceHandler, ToolbarItemOrder.Primary, 0));
+            this.ToolbarItems.Add(new ToolbarItem("[ Finish ]", null, OnFinishHandler, ToolbarItemOrder.Primary, 1));
         }
 
 

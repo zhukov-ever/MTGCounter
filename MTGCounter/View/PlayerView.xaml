@@ -3,7 +3,7 @@
 
     <ContentView.Content>
 
-        <Grid BackgroundColor="White" Padding="4">
+        <Grid BackgroundColor="White" Padding="4, 8, 4, 8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -14,14 +14,23 @@
             </Grid.ColumnDefinitions>
 
             <Label Text="Player" HorizontalOptions="Center" Font="18" 
+                   Margin="0,8,0,8"
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
-            <Button Text="-" BackgroundColor="Silver" Font="20"
-                    Grid.Row="1" Grid.Column="0" />
+            
+            <ContentView Grid.Row="1" Grid.Column="0" 
+                         VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                <Button Text="[-]" BackgroundColor="Silver" Font="20"/>
+            </ContentView>
+
             <Label Text="30" VerticalTextAlignment="Center" Font="28"
                    HorizontalTextAlignment="Center"
                    Grid.Row="1" Grid.Column="1" />
-            <Button Text="+" BackgroundColor="Silver" Font="20"
-                    Grid.Row="1" Grid.Column="2" />
+
+            <ContentView Grid.Row="1" Grid.Column="2" 
+                         VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                <Button Text="[+]" BackgroundColor="Silver" Font="20"/>
+            </ContentView>
+
         </Grid>
 
 	</ContentView.Content>

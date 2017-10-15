@@ -17,11 +17,11 @@ namespace MTGCounter
 
             Players = new ObservableCollection<PlayerViewModel>
             {
-                new PlayerViewModel { Name = "Zopen'" }
+                new PlayerViewModel()
             };
 
-            AddViewToGrid(new PlayerView(), playersGrid.Children.Count);
-            AddViewToGrid(new PlayerView(), playersGrid.Children.Count);
+            AddViewToGrid(new PlayerView(new PlayerViewModel()), playersGrid.Children.Count);
+            AddViewToGrid(new PlayerView(new PlayerViewModel()), playersGrid.Children.Count);
 
             NavigationPage.SetHasNavigationBar(this, true);
 
@@ -93,7 +93,7 @@ namespace MTGCounter
         {
             if (playersGrid.Children.Count < 8)
             {
-                AddViewToGrid(new PlayerView(), playersGrid.Children.Count);   
+                AddViewToGrid(new PlayerView(new PlayerViewModel()), playersGrid.Children.Count);   
             } else {
                 DisplayAlert("WOW", "Too much player. cant", "Okay");
             }

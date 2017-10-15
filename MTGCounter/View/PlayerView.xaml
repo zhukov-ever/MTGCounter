@@ -19,16 +19,17 @@
             
             <ContentView Grid.Row="1" Grid.Column="0" 
                          VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                <Button Text="[-]" BackgroundColor="Silver" Font="20"/>
+                <Button Clicked="OnIncreaseHP" Text="[-]" BackgroundColor="Silver" Font="20"/>
             </ContentView>
 
-            <Label Text="30" VerticalTextAlignment="Center" Font="28"
+            <Label x:Name="hpLabel" Text="30" 
+                   VerticalTextAlignment="Center" Font="28"
                    HorizontalTextAlignment="Center"
                    Grid.Row="1" Grid.Column="1" />
 
             <ContentView Grid.Row="1" Grid.Column="2" 
                          VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                <Button Text="[+]" BackgroundColor="Silver" Font="20"/>
+                <Button Clicked="OnDecreaseHP" Text="[+]" BackgroundColor="Silver" Font="20"/>
             </ContentView>
 
         </Grid>

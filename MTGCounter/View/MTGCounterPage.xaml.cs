@@ -9,19 +9,21 @@ namespace MTGCounter
     public partial class MTGCounterPage : ContentPage
     {
 
-        ObservableCollection<PlayerViewModel> Players { get; set; }
+        ObservableCollection<PlayerModel> Players { get; set; }
 
         public MTGCounterPage()
         {
             InitializeComponent();
 
-            Players = new ObservableCollection<PlayerViewModel>
+            Players = new ObservableCollection<PlayerModel>
             {
-                new PlayerViewModel()
+                new PlayerModel()
             };
 
-            AddViewToGrid(new PlayerView(new PlayerViewModel()), playersGrid.Children.Count);
-            AddViewToGrid(new PlayerView(new PlayerViewModel()), playersGrid.Children.Count);
+
+
+            AddViewToGrid(new PlayerView(new PlayerModel()), playersGrid.Children.Count);
+            AddViewToGrid(new PlayerView(new PlayerModel()), playersGrid.Children.Count);
 
             NavigationPage.SetHasNavigationBar(this, true);
 
@@ -93,7 +95,7 @@ namespace MTGCounter
         {
             if (playersGrid.Children.Count < 8)
             {
-                AddViewToGrid(new PlayerView(new PlayerViewModel()), playersGrid.Children.Count);   
+                AddViewToGrid(new PlayerView(new PlayerModel()), playersGrid.Children.Count);   
             } else {
                 DisplayAlert("WOW", "Too much player. cant", "Okay");
             }

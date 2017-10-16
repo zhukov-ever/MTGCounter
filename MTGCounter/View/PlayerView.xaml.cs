@@ -1,19 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Reactive.Subjects;
+using System.Diagnostics;
 
 namespace MTGCounter.View
 {
     public partial class PlayerView : ContentView
     {
-        public PlayerViewModel PlayerModel;
+        private ISubject<PlayerModel> PlayerChange;
+        public PlayerModel PlayerModel;
 
-
-        public PlayerView(PlayerViewModel playerModel)
+        PlayerView()
         {
             InitializeComponent();
+        }
+
+        ~PlayerView()
+        {
+            PlayerChange.OnCompleted();
+        }
+
+        public PlayerView(PlayerModel playerModel)
+        {
+            InitializeComponent();
+
+            PlayerChange = new Subject<PlayerModel>();
+            PlayerChange.Subscribe(PlayerChanged);
+
             PlayerModel = playerModel;
-            SetupStartHP();
+            PlayerChange.OnNext(PlayerModel);
+        }
+
+        void PlayerChanged(PlayerModel player) 
+        {
+            hpLabel.Text = player.HitPoints.ToString();   
         }
 
         void OnDecreaseHP(object sender, System.EventArgs e)
@@ -26,25 +47,16 @@ namespace MTGCounter.View
             DecreaseBy1HP();
         }
 
-        private void ShowHP(int hpValue)
-        {
-            PlayerModel.HitPoints = hpValue;
-            hpLabel.Text = PlayerModel.HitPoints.ToString();
-        }
-
-        private void SetupStartHP() 
-        {
-            ShowHP(PlayerModel.HitPoints);
-        }
-
         private void IncreaseBy1HP()
         {
-            ShowHP(++PlayerModel.HitPoints);
+            ++PlayerModel.HitPoints;
+            PlayerChange.OnNext(PlayerModel);
         }
 
         private void DecreaseBy1HP()
         {
-            ShowHP(--PlayerModel.HitPoints);
+            --PlayerModel.HitPoints;
+            PlayerChange.OnNext(PlayerModel);
         }
 
 

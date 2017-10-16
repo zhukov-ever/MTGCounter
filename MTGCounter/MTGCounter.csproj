@@ -44,7 +44,7 @@
     <Compile Include="View\MTGCounterPage.xaml.cs">
       <DependentUpon>MTGCounterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\PlayerViewModel.cs" />
+    <Compile Include="ViewModel\PlayerModel.cs" />
     <Compile Include="View\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>

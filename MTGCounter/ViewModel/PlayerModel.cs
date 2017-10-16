@@ -1,9 +1,9 @@
 ﻿using System;
 namespace MTGCounter
 {
-    public class PlayerViewModel
+    public class PlayerModel
     {
-        public PlayerViewModel() 
+        public PlayerModel() 
         {
             Name = "PLayer";
             HitPoints = 20;
